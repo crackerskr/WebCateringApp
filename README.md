@@ -1,11 +1,11 @@
-<h4>Remember to Run these command first:
-1. Run composer install
+<h4>Remember to Run these command first:</h4>
+<h5>1. Run composer install
 
 2. Run cp .env.example .env or copy .env.example .env
 
 3. php artisan key:generate
 
-4. Run php artisan serve</h4>
+4. Run php artisan serve</h5>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
