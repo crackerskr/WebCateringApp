@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    // Web App
     // Create New User
     public function storeUser(Request $request) {
         $request->validate([
@@ -65,4 +66,51 @@ class UserController extends Controller
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
+
+    // Mobile App
+    // Register
+    public function register(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => 'required|min:6',
+        ]);
+    
+        $validatedData['password'] = bcrypt($request->password);
+    
+        $user = User::create($validatedData);
+
+        $token = $user->createToken('MyApp')->accessToken;
+
+        return response()->json(['user' => $user, 'access_token' => $accessToken]);    
+    }
+
+    // Authenticate User
+    public function authenticateUser(Request $request) 
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication was successful...
+            $user = Auth::user();
+            if($user->is_admin == 0){
+                return response()->json(['success'=>true, 'message'=>'Login successful', 'data'=>$user], 200);
+            }else{
+                return response()->json(['success'=>false, 'message'=>'Unauthorized Access'], 401);
+            }
+        } else {
+            // Authentication failed...
+            return response()->json(['success'=>false, 'message'=>'Invalid email or password'], 401);
+        }
+    }
+
+    // Show User Profile in Mobile App
+    // function showUser(){
+    //     $data = User::
+    // }
 }

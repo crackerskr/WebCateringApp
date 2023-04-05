@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MobileController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,4 +20,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //Mobile App
-Route::get('menu', [MobileController::class, 'showMenu']);
+Route::post('login', [UserController::class, 'authenticateUser']);
+Route::post('register', [UserController::class, 'register']);
+
+// Show Menu in Menu Screen
+Route::get('menu/{category}', [MobileController::class, 'showMenu']);
+
+// Show Menu Details in Menu Details Screen
+Route::get('menu/{category}/{id}', [MobileController::class, 'showMenuDetails']);
