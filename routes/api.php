@@ -19,9 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Mobile App
+// Mobile App
+// Login User and Add Session
 Route::post('login', [UserController::class, 'authenticateUser']);
+
+// Register User Account
 Route::post('register', [UserController::class, 'register']);
+
+// Logout and Clear Session
+Route::post('logout',[UserController::class, 'logoutUser']);
 
 // Show Menu in Menu Screen
 Route::get('menu/{category}', [MobileController::class, 'showMenu']);
