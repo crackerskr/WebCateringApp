@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -132,6 +134,22 @@ class UserController extends Controller
                 'message' => 'Invalid email or password'
             ]);
         }
+
+        // if (Auth::attempt($credentials)) {
+        //     $user = Auth::user();
+        //     $token = $user->createToken('MyApp')->plainTextToken;
+        
+        //     return response()->json([
+        //       'success' => true,
+        //       'message' => 'Logged in successfully',
+        //       'token' => $token
+        //     ]);
+        //   } else {
+        //     return response()->json([
+        //       'success' => false,
+        //       'message' => 'Invalid email or password'
+        //     ]);
+        // }
     }
 
     public function logoutUser(Request $request){

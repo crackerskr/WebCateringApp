@@ -19,7 +19,7 @@ class Menu extends Model
 
     public function getOrder()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Order::class);
     }
     
     public function getMeat()

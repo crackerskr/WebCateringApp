@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 use App\Models\Dessert;
 use App\Models\Drink;
 use App\Models\Meat;
@@ -49,6 +51,60 @@ class MobileController extends Controller
         ]);
     }
 
+    // Place Order in OrderScreen
+    function placeOrder(Request $request){
+        $validator = Validator::make($request->all(), [
+            'billing_name' => 'required',
+            'contact_no' => ['required','numeric','min:10'],
+            'address' => 'required',
+            'delivery_date' => ['required', 'after_or_equal:' . now()->addDays(7)],
+        ]);
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors(),
+            ]);
+        }
 
+        $order = new Order();
+        $order->billing_name = $request->input('billing_name');
+        $order->contact_no = $request->input('contact_no');
+        $order->address = $request->input('address');
+        $order->delivery_date = new \DateTime($request->input('delivery_date'));
+        $order->menu_id = $request->input('menu_id');
+        $order->user_id = $request->input('user_id');
+        $order->status = 2;
+        $order->save();
+     
+        $ord = $order->find($order->id);
+
+        return response()->json([
+            'success'=> true,
+            'message'=> 'Order placed successfully',
+            'data'=> $ord->join('Menu', 'menu.id', '=', 'orders.menu_id')
+                ->join('Users', 'users.id', '=', 'orders.user_id')
+                ->select('orders.*', 'menu.name as menu_name',
+                'menu.category as menu_category')
+                ->where('orders.id', $order->id)
+                ->first()
+        ]);
+    }
+
+    // Show Order History in View Profile Screen
+    function showOrderHistory($id){
+        $orders = Order::where('orders.user_id', $id)
+                ->join('Menu', 'menu.id', '=', 'orders.menu_id')
+                ->join('Users', 'users.id', '=', 'orders.user_id')
+                ->select('orders.*', 'menu.name as menu_name',
+                'menu.category as menu_category')
+                ->get();
+
+        return response()->json([
+            'success'=>true,
+            'message'=>'string',
+            'data'=> $orders,
+        ]);
+    }
 
 }

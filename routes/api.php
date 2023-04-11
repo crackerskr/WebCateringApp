@@ -34,3 +34,9 @@ Route::get('menu/{category}', [MobileController::class, 'showMenu']);
 
 // Show Menu Details in Menu Details Screen
 Route::get('menu/{category}/{id}', [MobileController::class, 'showMenuDetails']);
+
+// Place Order in Order Screen
+Route::post('placeOrder', [MobileController::class, 'placeOrder']);
+
+// Show Order History in View Profile Screen
+Route::get('orders/{id}', [MobileController::class, 'showOrderHistory']);

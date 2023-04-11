@@ -18,7 +18,7 @@ class Order extends Model
 
     public function getMenu()
     {
-        return $this->hasOne(Menu::class);
+        return $this->belongsTo(Menu::class, 'menu_id');
     }
 
 
