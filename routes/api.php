@@ -40,3 +40,6 @@ Route::post('placeOrder', [MobileController::class, 'placeOrder']);
 
 // Show Order History in View Profile Screen
 Route::get('orders/{id}', [MobileController::class, 'showOrderHistory']);
+
+// Show Pending Order only in Track Order List Screen
+Route::get('trackList/{id}', [MobileController::class, 'showTrackOrderList']);

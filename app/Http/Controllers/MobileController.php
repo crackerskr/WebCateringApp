@@ -94,6 +94,25 @@ class MobileController extends Controller
     // Show Order History in View Profile Screen
     function showOrderHistory($id){
         $orders = Order::where('orders.user_id', $id)
+                ->whereIn('orders.status', [1, 3])
+                ->join('Menu', 'menu.id', '=', 'orders.menu_id')
+                ->join('Users', 'users.id', '=', 'orders.user_id')
+                ->select('orders.*', 'menu.name as menu_name',
+                'menu.category as menu_category', 
+                'menu.min_order_amount as menu_min_order_amount')
+                ->get();
+
+        return response()->json([
+            'success'=>true,
+            'message'=>'string',
+            'data'=> $orders,
+        ]);
+    }
+
+    // Show Pending Order only in Track Order List Screen
+    function showTrackOrderList($id){
+        $orders = Order::where('orders.user_id', $id)
+                ->where('orders.status', 2)
                 ->join('Menu', 'menu.id', '=', 'orders.menu_id')
                 ->join('Users', 'users.id', '=', 'orders.user_id')
                 ->select('orders.*', 'menu.name as menu_name',
