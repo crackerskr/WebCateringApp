@@ -43,3 +43,6 @@ Route::get('orders/{id}', [MobileController::class, 'showOrderHistory']);
 
 // Show Pending Order only in Track Order List Screen
 Route::get('trackList/{id}', [MobileController::class, 'showTrackOrderList']);
+
+// Cancel Order in Track Screen (update the status to 3)
+Route::put('cancelOrder/{id}', [MobileController::class, 'cancelOrder']);

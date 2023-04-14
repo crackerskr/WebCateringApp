@@ -126,4 +126,16 @@ class MobileController extends Controller
         ]);
     }
 
+    // Cancel Order in Track Screen (update the status to 3)
+    function cancelOrder($id){
+        $data = Order::find($id);
+        $data->status = 3;
+        $data->save();  
+
+        return response()->json([
+            'success'=>true,
+            'message'=>'Order has been cancelled.',
+        ]);      
+    }
+
 }
