@@ -23,7 +23,6 @@ class WebController extends Controller
 
     // Show Food Include in Add Menu
     function showFoodInclude($category){
-        // $menuData = Menu::where('id',$)
         $meatData = Meat::all();
         $seafoodData = Seafood::all();
         $vegetableData = Vegetable::all();
@@ -143,4 +142,159 @@ class WebController extends Controller
         $data->save();
         return redirect('/order/'. $id);
     }
+
+    // Show Food Include in Add Food
+    function showAllFood($category){
+        switch ($category) {
+            case 'meat':
+                $data = Meat::all();
+                $view = 'addMeat';
+                break;
+            case 'seafood':
+                $data = Seafood::all();
+                $view = 'addSeafood';
+                break;
+            case 'vegetable':
+                $data = Vegetable::all();
+                $view = 'addVegetable';
+                break;
+            case 'riceNnoodle':
+                $data = RiceNnoodle::all();
+                $view = 'addRiceNnoodle';
+                break;
+            case 'drink':
+                $data = Drink::all();
+                $view = 'addDrink';
+                break;
+            case 'dessert':
+                $data = Dessert::all();
+                $view = 'addDessert';
+                break;
+            default:
+                abort(404); // Return a 404 error for invalid categories
+        }
+        
+        return view($view, compact('data'));
+    }
+
+    // Add Meat
+    function addMeat(Request $request){
+        $request->validate([
+            'name' => 'required|unique:meats',
+        ]);
+
+        $meat = new Meat();
+        $meat->name = $request->input('name');
+        $meat->save();
+
+        return redirect('/food/meat')->with('success', 'Meat name added successfully!');
+    }
+
+    // Delete Meat
+    function deleteMeat($id){
+        $meat = Meat::find($id);
+        $meat->delete();      
+        return redirect('/food/meat');
+    }
+
+    // Add Seafood
+    function addSeafood(Request $request){
+        $request->validate([
+            'name' => 'required|unique:seafoods',
+        ]);
+
+        $seafood = new Seafood();
+        $seafood->name = $request->input('name');
+        $seafood->save();
+
+        return redirect('/food/seafood')->with('success', 'Seafood name added successfully!');
+    }
+
+    // Delete Seafood
+    function deleteSeafood($id){
+        $seafood = Seafood::find($id);
+        $seafood->delete();      
+        return redirect('/food/seafood');
+    }
+
+    // Add Vegetable
+    function addVegetable(Request $request){
+        $request->validate([
+            'name' => 'required|unique:vegetables',
+        ]);
+
+        $vegetable = new Vegetable();
+        $vegetable->name = $request->input('name');
+        $vegetable->save();
+
+        return redirect('/food/vegetable')->with('success', 'Vegetable name added successfully!');
+    }
+
+    // Delete Vegetable
+    function deleteVegetable($id){
+        $vegetable = Vegetable::find($id);
+        $vegetable->delete();      
+        return redirect('/food/vegetable');
+    }
+
+    // Add RiceNnoodle
+    function addRiceNnoodle(Request $request){
+        $request->validate([
+            'name' => 'required|unique:riceNnoodles',
+        ]);
+
+        $riceNnoodle = new RiceNnoodle();
+        $riceNnoodle->name = $request->input('name');
+        $riceNnoodle->save();
+
+        return redirect('/food/riceNnoodle')->with('success', 'Seafood name added successfully!');
+    }
+
+    // Delete RiceNnoodle
+    function deleteRiceNnoodle($id){
+        $riceNnoodle = RiceNnoodle::find($id);
+        $riceNnoodle->delete();      
+        return redirect('/food/riceNnoodle');
+    }
+
+    // Add Drink
+    function addDrink(Request $request){
+        $request->validate([
+            'name' => 'required|unique:drinks',
+        ]);
+
+        $drink = new Drink();
+        $drink->name = $request->input('name');
+        $drink->save();
+
+        return redirect('/food/drink')->with('success', 'Drink name added successfully!');
+    }
+
+    // Delete Drink
+    function deleteDrink($id){
+        $drink = Drink::find($id);
+        $drink->delete();      
+        return redirect('/food/drink');
+    }
+    
+    // Add Dessert
+    function addDessert(Request $request){
+        $request->validate([
+            'name' => 'required|unique:desserts',
+        ]);
+
+        $dessert = new Dessert();
+        $dessert->name = $request->input('name');
+        $dessert->save();
+
+        return redirect('/food/dessert')->with('success', 'Dessert name added successfully!');
+    }
+
+    // Delete Dessert
+    function deleteDessert($id){
+        $dessert = Dessert::find($id);
+        $dessert->delete();      
+        return redirect('/food/dessert');
+    }
+
 }

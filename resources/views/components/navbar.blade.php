@@ -23,7 +23,7 @@
                 <a href="{{url('menu/' . $menu->category . '/Mini Buffet')}}">MINI BUFFET</a>
             </div>
         </div> --}}
-
+        <a class='left' href="/food">FOOD</a>
         <a class='left' href="/order">ORDER</a>
         <a class='right' href="/logout"><i class="fa fa-sign-out"></i></a>
     </div>

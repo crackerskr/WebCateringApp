@@ -21,5 +21,10 @@ class Order extends Model
         return $this->belongsTo(Menu::class, 'menu_id');
     }
 
+    public function getRating()
+    {
+        return $this->hasOne(Rating::class);
+    }
+
 
 }

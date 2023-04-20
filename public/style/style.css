@@ -200,6 +200,12 @@ body {
     position: relative;
 }
 
+.add-icon {
+    color: #D86969;
+    font-size: xx-large;
+    padding-left: 10px;
+}
+
 
 /* ORDER CSS */
 .container {
@@ -279,4 +285,54 @@ body {
 
 .icon {
     color:#D86969;
+}
+
+/* FOOD CSS */
+.foodHome-container {
+    width: 80%; 
+    height: 50%; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.foodHomeRow {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 20px;
+}
+
+.foodHomeCol {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #D86969;
+    width: 50%;
+    padding: 15px;
+    margin: 0px 100px;
+    border-radius: 15px;
+    transition: transform 0.2s ease;
+    text-decoration: none;
+}
+.foodHomeCol:hover{
+    transform: scale(1.05);
+}
+.foodHome-container i {
+    font-size: xx-large;
+    align-self: center;
+}
+
+/* ADD FOOD CSS */
+.addFood-container{
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 70%; 
+    height: 50%; 
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

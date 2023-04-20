@@ -37,7 +37,6 @@ Route::get('menu/{category}', [WebController::class, 'showMenu'])->name('menu');
 Route::get('menu/{category}/add', [WebController::class, 'showFoodInclude']);
 Route::post('addMenu',[WebController::class,'addMenu']);
 
-
 // Show Edit Menu Form
 Route::get('menu/{id}/edit',[WebController::class, 'showMenuDetails']);
 // Update Menu
@@ -45,6 +44,37 @@ Route::put('editMenu',[WebController::class, 'updateMenu']);
 
 //Delete Menu
 Route::delete('/menu/{category}/{id}/delete', [WebController::class, 'deleteMenu']);
+
+
+
+// Show Food Homepage
+Route::view('food', 'food')->name('food');
+Route::get('food/{category}', [WebController::class, 'showAllFood']);
+
+// Add & Delete Meat
+Route::post('addMeat',[WebController::class,'addMeat']);
+Route::delete('deleteMeat/{id}',[WebController::class,'deleteMeat']);
+
+// Add & Delete Seafood
+Route::post('addSeafood',[WebController::class,'addSeafood']);
+Route::delete('deleteSeafood/{id}',[WebController::class,'deleteSeafood']);
+
+// Add & Delete Vegetable
+Route::post('addVegetable',[WebController::class,'addVegetable']);
+Route::delete('deleteVegetable/{id}',[WebController::class,'deleteVegetable']);
+
+// Add & Delete Rice & Noodle
+Route::post('addRiceNnoodle',[WebController::class,'addRiceNnoodle']);
+Route::delete('deleteRiceNnoodle/{id}',[WebController::class,'deleteRiceNnoodle']);
+
+// Add & Delete Drink
+Route::post('addDrink',[WebController::class,'addDrink']);
+Route::delete('deleteDrink/{id}',[WebController::class,'deleteDrink']);
+
+// Add & Delete Dessert
+Route::post('addDessert',[WebController::class,'addDessert']);
+Route::delete('deleteDessert/{id}',[WebController::class,'deleteDessert']);
+
 
 
 

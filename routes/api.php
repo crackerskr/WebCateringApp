@@ -46,3 +46,9 @@ Route::get('trackList/{id}', [MobileController::class, 'showTrackOrderList']);
 
 // Cancel Order in Track Screen (update the status to 3)
 Route::put('cancelOrder/{id}', [MobileController::class, 'cancelOrder']);
+
+// Insert Rating
+Route::post('rating/{id}', [MobileController::class, 'rating']);
+
+// Show Rating
+Route::get('rating/{id}', [MobileController::class, 'showRating']);

@@ -51,6 +51,7 @@
                             <option value="{{ $meat->id }}">{{ $meat->name }}</option> 
                         @endforeach
                     </select>
+                    <!-- <a href="{{ url('/food/meat') }}" class="color-a"><i class="add-icon fa-solid fa-square-plus"></i></a> -->
                 </div>
                 <div class="foodRow">
                     <h4 class="menuLabel">Seafoods: </h4>

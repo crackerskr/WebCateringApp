@@ -14,6 +14,7 @@ use App\Models\RiceNnoodle;
 use App\Models\Seafood;
 use App\Models\User;
 use App\Models\Vegetable;
+use App\Models\Rating;
 
 class MobileController extends Controller
 {
@@ -55,7 +56,7 @@ class MobileController extends Controller
     function placeOrder(Request $request){
         $validator = Validator::make($request->all(), [
             'billing_name' => 'required',
-            'contact_no' => ['required','numeric','min:10'],
+            'contact_no' => 'required|string|min:10|max:11|regex:/[0-9]{9}/',
             'address' => 'required',
             'delivery_date' => ['required', 'after_or_equal:' . now()->addDays(7)],
         ]);
@@ -72,6 +73,7 @@ class MobileController extends Controller
         $order->contact_no = $request->input('contact_no');
         $order->address = $request->input('address');
         $order->delivery_date = new \DateTime($request->input('delivery_date'));
+        $order->amount = $request->input('amount');
         $order->menu_id = $request->input('menu_id');
         $order->user_id = $request->input('user_id');
         $order->status = 2;
@@ -116,7 +118,9 @@ class MobileController extends Controller
                 ->join('Menu', 'menu.id', '=', 'orders.menu_id')
                 ->join('Users', 'users.id', '=', 'orders.user_id')
                 ->select('orders.*', 'menu.name as menu_name',
-                'menu.category as menu_category')
+                'menu.category as menu_category',
+                'menu.price as menu_price')
+                ->orderBy('orders.delivery_date', 'desc')
                 ->get();
 
         return response()->json([
@@ -136,6 +140,41 @@ class MobileController extends Controller
             'success'=>true,
             'message'=>'Order has been cancelled.',
         ]);      
+    }
+
+    // Insert Rating
+    function rating(Request $request, $id){
+        $validator = Validator::make($request->all(), [            
+            'rating' => 'number',
+        ]);
+
+        $data = new Rating();
+        $data->rating = $request->input('rating');
+        $data->order_id = $id;
+        $data->date = date('Y-m-d H:i:s');;
+        $data->save();
+
+        return response()->json([
+            'success'=> true,
+            'message'=> 'Thank you for the rating.',
+            'data'=> $data,
+        ]);
+    }
+
+    // Show Rating
+    function showRating($id){
+        $rating = Rating::where('order_id', $id)->first();
+        
+        if(is_null($rating)){
+            return response()->json([
+                'success'=> false,
+            ]);
+        }else{
+            return response()->json([
+                'success'=> true,
+                'data' => $rating
+            ]);
+        }
     }
 
 }
