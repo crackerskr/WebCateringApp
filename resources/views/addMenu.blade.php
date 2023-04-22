@@ -4,7 +4,7 @@
 
 <div class="menu-container">
     
-    <h2><a href="{{ back()->getTargetUrl()}}" class="color-a"><i class="fa-solid fa-arrow-left"></i></a>Add Menu</h2>
+    <h2><a href="{{ url('menu/' . $category ) }}" class="color-a"><i class="fa-solid fa-arrow-left"></i></a>Add Menu</h2>
 
     <form action="/addMenu" method="POST">
     @csrf
@@ -17,6 +17,7 @@
             </div>
             <div class="menuInput">
                 <input type="text" class="input" id="name" name="name" placeholder="Enter menu name">
+                <span style="color:red;font-weight:bold">@error('name'){{$message}}@enderror</span><br>
             </div>
         </div>
 
@@ -26,6 +27,7 @@
             </div>
             <div class="menuInput">
                 <input type="text" class="input" id="price" name="price" placeholder="Enter menu price">
+                <span style="color:red;font-weight:bold">@error('price'){{$message}}@enderror</span><br>
             </div>
         </div>
 
@@ -35,6 +37,7 @@
             </div>
             <div class="menuInput">
                 <input type="text" class="input" id="amount" name="amount" placeholder="Enter min order amount">
+                <span style="color:red;font-weight:bold">@error('amount'){{$message}}@enderror</span><br>
             </div>
         </div>
 
@@ -51,6 +54,7 @@
                             <option value="{{ $meat->id }}">{{ $meat->name }}</option> 
                         @endforeach
                     </select>
+                    <span style="color:red;font-weight:bold">@error('meats_id'){{$message}}@enderror</span><br>
                     <!-- <a href="{{ url('/food/meat') }}" class="color-a"><i class="add-icon fa-solid fa-square-plus"></i></a> -->
                 </div>
                 <div class="foodRow">
@@ -60,7 +64,8 @@
                             @foreach($seafoodData as $seafood)
                                 <option value="{{ $seafood->id }}">{{ $seafood->name }}</option> 
                             @endforeach                   
-                    </select>    
+                    </select>   
+                    <span style="color:red;font-weight:bold">@error('seafoods_id'){{$message}}@enderror</span><br> 
                 </div>
                 <div class="foodRow">
                     <h4 class="menuLabel">Vegetables: </h4>
@@ -70,6 +75,7 @@
                                 <option value="{{ $vegetable->id }}">{{ $vegetable->name }}</option> 
                             @endforeach                   
                     </select>    
+                    <span style="color:red;font-weight:bold">@error('vegetables_id'){{$message}}@enderror</span><br>
                 </div>
                 <div class="foodRow">
                     <h4 class="menuLabel">Rice & Noodles: </h4>
@@ -79,6 +85,7 @@
                                 <option value="{{ $riceNnoodle->id }}">{{ $riceNnoodle->name }}</option> 
                             @endforeach                   
                     </select>    
+                    <span style="color:red;font-weight:bold">@error('riceNnoodles_id'){{$message}}@enderror</span><br>
                 </div>
                 <div class="foodRow">
                     <h4 class="menuLabel">Desserts: </h4>
@@ -88,6 +95,7 @@
                                 <option value="{{ $dessert->id }}">{{ $dessert->name }}</option> 
                             @endforeach                   
                     </select>    
+                    <span style="color:red;font-weight:bold">@error('desserts_id'){{$message}}@enderror</span><br>
                 </div>
                 <div class="foodRow">
                     <h4 class="menuLabel">Drinks: </h4>
@@ -97,6 +105,7 @@
                                 <option value="{{ $drink->id }}">{{ $drink->name }}</option> 
                             @endforeach                   
                     </select>    
+                    <span style="color:red;font-weight:bold">@error('drinks_id'){{$message}}@enderror</span><br>
                 </div>
             </div>
         </div>
