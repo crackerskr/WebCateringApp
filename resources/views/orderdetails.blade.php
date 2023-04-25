@@ -11,13 +11,13 @@
             <form id="complete" action="{{ url('order/' . $order->id . '/complete') }}" method="POST" style="display:inline">
                 @csrf
                 @method('PUT')
-                <div style="border:none; font-size:30px; cursor:pointer" onclick="completeOrder()"><i class="fa-solid fa-clipboard-check icon"></i></div>
+                <div style="border:none; font-size:30px; cursor:pointer" onclick="completeOrder()"><i class="fa-solid fa-clipboard-check icon-complete" ></i></div>
             </form>
 
             <form id="cancel" action="{{ url('order/' . $order->id . '/cancel') }}" method="POST" style="display:inline">
                 @csrf
                 @method('PUT')
-                <div style="border:none; font-size:30px; cursor:pointer" onclick="cancelOrder()"><i class="fa-solid fa-ban icon"></i></div>
+                <div style="border:none; font-size:30px; cursor:pointer" onclick="cancelOrder()"><i class="fa-solid fa-ban icon-cancel"></i></div>
             </form>
         </div>
         @endif

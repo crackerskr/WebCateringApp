@@ -115,7 +115,7 @@ class WebController extends Controller
 
     // Show Order
     function showOrder(){
-        $orders = Order::paginate(3);
+        $orders = Order::orderby('delivery_date', 'desc')->paginate(3);
         $menuData = Menu::all();
         return view ('order', compact('orders','menuData'));
     }

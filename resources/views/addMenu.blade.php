@@ -23,7 +23,7 @@
 
         <div class="menuContent">
             <div class="menuLabel">
-                <label for="name">Menu Price</label>
+                <label for="name">Menu Price/pax</label>
             </div>
             <div class="menuInput">
                 <input type="text" class="input" id="price" name="price" placeholder="Enter menu price">

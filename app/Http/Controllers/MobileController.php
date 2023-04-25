@@ -87,7 +87,8 @@ class MobileController extends Controller
             'data'=> $ord->join('Menu', 'menu.id', '=', 'orders.menu_id')
                 ->join('Users', 'users.id', '=', 'orders.user_id')
                 ->select('orders.*', 'menu.name as menu_name',
-                'menu.category as menu_category')
+                'menu.category as menu_category',
+                'menu.price as menu_price')
                 ->where('orders.id', $order->id)
                 ->first()
         ]);
