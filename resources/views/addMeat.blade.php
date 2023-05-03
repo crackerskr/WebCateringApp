@@ -2,7 +2,7 @@
 
 <x-navbar />
 
-<div class="menu-container">
+<div class="addFood-container">
     
     <h2><a href="{{ url('/food') }}" class="color-a"><i class="fa-solid fa-arrow-left"></i></a>Add Meat</h2>
 
@@ -29,10 +29,10 @@
     @csrf    
         <div class="menuContent">
             <div class="menuLabel">
-                <label for="name">Food Name</label>
+                <label for="name">Meat Name</label>
             </div>
             <div class="menuInput">
-                <input type="text" class="input" id="name" name="name" placeholder="Enter food name">
+                <input type="text" class="input" id="name" name="name" placeholder="Enter meat name">
                 <span style="color:red;font-weight:bold">@error('name'){{$message}}@enderror</span><br>
             </div>
         </div>

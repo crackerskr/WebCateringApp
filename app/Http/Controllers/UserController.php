@@ -120,7 +120,7 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');    
         
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
+            // Authentication passed
             $user = Auth::user();
             session(['user_id', $user->id]);
             return response()->json([
@@ -134,22 +134,6 @@ class UserController extends Controller
                 'message' => 'Invalid email or password'
             ]);
         }
-
-        // if (Auth::attempt($credentials)) {
-        //     $user = Auth::user();
-        //     $token = $user->createToken('MyApp')->plainTextToken;
-        
-        //     return response()->json([
-        //       'success' => true,
-        //       'message' => 'Logged in successfully',
-        //       'token' => $token
-        //     ]);
-        //   } else {
-        //     return response()->json([
-        //       'success' => false,
-        //       'message' => 'Invalid email or password'
-        //     ]);
-        // }
     }
 
     public function logoutUser(Request $request){
